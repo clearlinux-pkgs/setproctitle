@@ -6,13 +6,14 @@
 #
 Name     : setproctitle
 Version  : 1.1.10
-Release  : 1
+Release  : 2
 URL      : http://pypi.debian.net/setproctitle/setproctitle-1.1.10.tar.gz
 Source0  : http://pypi.debian.net/setproctitle/setproctitle-1.1.10.tar.gz
-Source99 : https://pypi.python.org/packages/5a/0d/dc0d2234aacba6cf1a729964383e3452c52096dc695581248b548786f2b3/setproctitle-1.1.10.tar.gz.asc
+Source99 : http://pypi.debian.net/setproctitle/setproctitle-1.1.10.tar.gz.asc
 Summary  : A Python module to customize the process title
 Group    : Development/Tools
 License  : BSD-3-Clause
+Requires: setproctitle-legacypython
 Requires: setproctitle-python
 BuildRequires : pbr
 BuildRequires : pip
@@ -23,9 +24,18 @@ BuildRequires : setuptools
 %description
 ==============================================
 
+%package legacypython
+Summary: legacypython components for the setproctitle package.
+Group: Default
+
+%description legacypython
+legacypython components for the setproctitle package.
+
+
 %package python
 Summary: python components for the setproctitle package.
 Group: Default
+Requires: setproctitle-legacypython
 
 %description python
 python components for the setproctitle package.
@@ -39,12 +49,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1502836558
+export SOURCE_DATE_EPOCH=1505071287
 python2 setup.py build -b py2
 python3 setup.py build -b py3
 
 %install
-export SOURCE_DATE_EPOCH=1502836558
+export SOURCE_DATE_EPOCH=1505071287
 rm -rf %{buildroot}
 python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
 python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
@@ -55,7 +65,10 @@ echo ----[ mark ]----
 %files
 %defattr(-,root,root,-)
 
-%files python
+%files legacypython
 %defattr(-,root,root,-)
 /usr/lib/python2*/*
+
+%files python
+%defattr(-,root,root,-)
 /usr/lib/python3*/*
