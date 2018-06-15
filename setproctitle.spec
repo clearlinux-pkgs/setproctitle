@@ -17,7 +17,7 @@ Requires: setproctitle-python3
 Requires: setproctitle-python
 BuildRequires : pbr
 BuildRequires : pip
-BuildRequires : python-dev
+
 BuildRequires : python3-dev
 BuildRequires : setuptools
 
