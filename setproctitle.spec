@@ -6,7 +6,7 @@
 #
 Name     : setproctitle
 Version  : 1.1.10
-Release  : 13
+Release  : 14
 URL      : http://pypi.debian.net/setproctitle/setproctitle-1.1.10.tar.gz
 Source0  : http://pypi.debian.net/setproctitle/setproctitle-1.1.10.tar.gz
 Source99 : http://pypi.debian.net/setproctitle/setproctitle-1.1.10.tar.gz.asc
@@ -14,12 +14,16 @@ Summary  : A Python module to customize the process title
 Group    : Development/Tools
 License  : BSD-3-Clause
 Requires: setproctitle-python3
+Requires: setproctitle-license
 Requires: setproctitle-python
 BuildRequires : pbr
 BuildRequires : pip
-
+BuildRequires : python-core
+BuildRequires : python-dev
+BuildRequires : python3-core
 BuildRequires : python3-dev
 BuildRequires : setuptools
+BuildRequires : setuptools-legacypython
 
 %description
 ==============================================
@@ -31,6 +35,14 @@ Requires: python-core
 
 %description legacypython
 legacypython components for the setproctitle package.
+
+
+%package license
+Summary: license components for the setproctitle package.
+Group: Default
+
+%description license
+license components for the setproctitle package.
 
 
 %package python
@@ -59,13 +71,15 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1519422712
+export SOURCE_DATE_EPOCH=1530398000
 python2 setup.py build -b py2
 python3 setup.py build -b py3
 
 %install
-export SOURCE_DATE_EPOCH=1519422712
+export SOURCE_DATE_EPOCH=1530398000
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/doc/setproctitle
+cp COPYRIGHT %{buildroot}/usr/share/doc/setproctitle/COPYRIGHT
 python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
 python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
 echo ----[ mark ]----
@@ -78,6 +92,10 @@ echo ----[ mark ]----
 %files legacypython
 %defattr(-,root,root,-)
 /usr/lib/python2*/*
+
+%files license
+%defattr(-,root,root,-)
+/usr/share/doc/setproctitle/COPYRIGHT
 
 %files python
 %defattr(-,root,root,-)
