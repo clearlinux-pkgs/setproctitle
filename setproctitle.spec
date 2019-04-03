@@ -6,36 +6,22 @@
 #
 Name     : setproctitle
 Version  : 1.1.10
-Release  : 20
+Release  : 21
 URL      : http://pypi.debian.net/setproctitle/setproctitle-1.1.10.tar.gz
 Source0  : http://pypi.debian.net/setproctitle/setproctitle-1.1.10.tar.gz
 Source99 : http://pypi.debian.net/setproctitle/setproctitle-1.1.10.tar.gz.asc
 Summary  : A Python module to customize the process title
 Group    : Development/Tools
 License  : BSD-3-Clause
-Requires: setproctitle-python3
-Requires: setproctitle-license
-Requires: setproctitle-python
-BuildRequires : pbr
-BuildRequires : pip
-BuildRequires : python-core
+Requires: setproctitle-license = %{version}-%{release}
+Requires: setproctitle-python = %{version}-%{release}
+Requires: setproctitle-python3 = %{version}-%{release}
+BuildRequires : buildreq-distutils3
 BuildRequires : python-dev
-BuildRequires : python3-core
-BuildRequires : python3-dev
-BuildRequires : setuptools
-BuildRequires : setuptools-legacypython
 
 %description
+A Python module to customize the process title
 ==============================================
-
-%package legacypython
-Summary: legacypython components for the setproctitle package.
-Group: Default
-Requires: python-core
-
-%description legacypython
-legacypython components for the setproctitle package.
-
 
 %package license
 Summary: license components for the setproctitle package.
@@ -48,7 +34,7 @@ license components for the setproctitle package.
 %package python
 Summary: python components for the setproctitle package.
 Group: Default
-Requires: setproctitle-python3
+Requires: setproctitle-python3 = %{version}-%{release}
 
 %description python
 python components for the setproctitle package.
@@ -71,17 +57,16 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1530398000
-python2 setup.py build -b py2
-python3 setup.py build -b py3
+export SOURCE_DATE_EPOCH=1554328065
+export MAKEFLAGS=%{?_smp_mflags}
+python3 setup.py build
 
 %install
-export SOURCE_DATE_EPOCH=1530398000
+export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/doc/setproctitle
-cp COPYRIGHT %{buildroot}/usr/share/doc/setproctitle/COPYRIGHT
-python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
-python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
+mkdir -p %{buildroot}/usr/share/package-licenses/setproctitle
+cp COPYRIGHT %{buildroot}/usr/share/package-licenses/setproctitle/COPYRIGHT
+python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
@@ -89,13 +74,9 @@ echo ----[ mark ]----
 %files
 %defattr(-,root,root,-)
 
-%files legacypython
-%defattr(-,root,root,-)
-/usr/lib/python2*/*
-
 %files license
-%defattr(-,root,root,-)
-/usr/share/doc/setproctitle/COPYRIGHT
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/setproctitle/COPYRIGHT
 
 %files python
 %defattr(-,root,root,-)
