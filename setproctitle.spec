@@ -6,10 +6,10 @@
 #
 Name     : setproctitle
 Version  : 1.1.10
-Release  : 23
+Release  : 24
 URL      : http://pypi.debian.net/setproctitle/setproctitle-1.1.10.tar.gz
 Source0  : http://pypi.debian.net/setproctitle/setproctitle-1.1.10.tar.gz
-Source99 : http://pypi.debian.net/setproctitle/setproctitle-1.1.10.tar.gz.asc
+Source1 : http://pypi.debian.net/setproctitle/setproctitle-1.1.10.tar.gz.asc
 Summary  : A Python module to customize the process title
 Group    : Development/Tools
 License  : BSD-3-Clause
@@ -17,10 +17,8 @@ Requires: setproctitle-license = %{version}-%{release}
 Requires: setproctitle-python = %{version}-%{release}
 Requires: setproctitle-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
-BuildRequires : python-dev
 
 %description
-A Python module to customize the process title
 ==============================================
 
 %package license
@@ -56,8 +54,13 @@ python3 components for the setproctitle package.
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1554328065
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1569443596
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$CFLAGS -fno-lto "
+export FFLAGS="$CFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
