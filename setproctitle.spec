@@ -6,7 +6,7 @@
 #
 Name     : setproctitle
 Version  : 1.1.10
-Release  : 24
+Release  : 25
 URL      : http://pypi.debian.net/setproctitle/setproctitle-1.1.10.tar.gz
 Source0  : http://pypi.debian.net/setproctitle/setproctitle-1.1.10.tar.gz
 Source1 : http://pypi.debian.net/setproctitle/setproctitle-1.1.10.tar.gz.asc
