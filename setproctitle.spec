@@ -5,11 +5,11 @@
 # Source0 file verified with key 0x6013BD3AFCF957DE (daniele.varrazzo@gmail.com)
 #
 Name     : setproctitle
-Version  : 1.1.10
-Release  : 29
-URL      : http://pypi.debian.net/setproctitle/setproctitle-1.1.10.tar.gz
-Source0  : http://pypi.debian.net/setproctitle/setproctitle-1.1.10.tar.gz
-Source1  : http://pypi.debian.net/setproctitle/setproctitle-1.1.10.tar.gz.asc
+Version  : 1.2.1
+Release  : 30
+URL      : https://files.pythonhosted.org/packages/a7/e1/e76b903af017cc4a99f823b5e4235c1136dcca6902e6b7ee4d545958ba8c/setproctitle-1.2.1.tar.gz
+Source0  : https://files.pythonhosted.org/packages/a7/e1/e76b903af017cc4a99f823b5e4235c1136dcca6902e6b7ee4d545958ba8c/setproctitle-1.2.1.tar.gz
+Source1  : https://files.pythonhosted.org/packages/a7/e1/e76b903af017cc4a99f823b5e4235c1136dcca6902e6b7ee4d545958ba8c/setproctitle-1.2.1.tar.gz.asc
 Summary  : A Python module to customize the process title
 Group    : Development/Tools
 License  : BSD-3-Clause
@@ -49,15 +49,15 @@ python3 components for the setproctitle package.
 
 
 %prep
-%setup -q -n setproctitle-1.1.10
-cd %{_builddir}/setproctitle-1.1.10
+%setup -q -n setproctitle-1.2.1
+cd %{_builddir}/setproctitle-1.2.1
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1603404173
+export SOURCE_DATE_EPOCH=1607383166
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
@@ -70,7 +70,7 @@ python3 setup.py build
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/setproctitle
-cp %{_builddir}/setproctitle-1.1.10/COPYRIGHT %{buildroot}/usr/share/package-licenses/setproctitle/6811a69b9d51a4b350aa2fa0a4c2adae54bfef31
+cp %{_builddir}/setproctitle-1.2.1/COPYRIGHT %{buildroot}/usr/share/package-licenses/setproctitle/ad731867414c721228cfe9db129c47563dcc2cbe
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
@@ -81,7 +81,7 @@ echo ----[ mark ]----
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/setproctitle/6811a69b9d51a4b350aa2fa0a4c2adae54bfef31
+/usr/share/package-licenses/setproctitle/ad731867414c721228cfe9db129c47563dcc2cbe
 
 %files python
 %defattr(-,root,root,-)
